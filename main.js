@@ -15,9 +15,9 @@
 // and has the same effect as `f.call(...)`, except in case when `f` throws an error,
 //     it should instead just return `null` without throwing any errors.
 
-Function.prototype.safeCall = function(...params){
+Function.prototype.safeCall = function(context, ...params){
     try {
-        return this.call(this, ...params);
+        return this.call(context, ...params);
     } catch (e) {
         return null;
     }
