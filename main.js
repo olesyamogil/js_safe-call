@@ -15,17 +15,13 @@
 // and has the same effect as `f.call(...)`, except in case when `f` throws an error,
 //     it should instead just return `null` without throwing any errors.
 
-Object.prototype.safeCallMethod = function(){
+Function.prototype.safeCall = function(...params){
     try {
-        return this.call();
+        return this.call(this, ...params);
     } catch (e) {
         return null;
     }
 };
-
-
-const f = () => abc;
-console.log(f.safeCallMethod());
 
 const safeCall = function(f){
     try {
@@ -33,8 +29,6 @@ const safeCall = function(f){
         return true;
     } catch (e) {
         return false;
-    } finally {
-        console.log("safeCall completed");
     }
 };
 console.log(safeCall(() => console.log('Hello!')));
